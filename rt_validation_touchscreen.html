@@ -15,11 +15,15 @@
 //jatos.onLoad(function() {
 
     var n_trials = 10;
-    var iti = 500; // should this be randomly jittered within an interval?
+    var min_iti = 250;
+    var max_iti = 750;
 
     var timeline = [];
 
     for (i=0;i<n_trials;i++) {
+
+        var current_iti = Math.floor(Math.random()*(max_iti-min_iti))+min_iti;
+
         var trial = {
             type: 'html-button-response',
             stimulus: '<div class="jspsych-rt-target"></div>',
@@ -29,13 +33,14 @@
             stimulus_duration: 2000,
             trial_duration: 2000,
             response_ends_trial: true,
+            post_trial_gap: current_iti,
+            data: {iti: current_iti}
         };
         timeline.push(trial);
     }
 
     jsPsych.init({
         timeline: timeline,
-        default_iti: iti,
         on_finish: function() {
             jsPsych.data.displayData();
             //jatos.submitResultData(jsPsych.data.get().json(), jatos.startNextComponent);
