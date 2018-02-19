@@ -14,11 +14,25 @@
 <script type="text/javascript">
 //jatos.onLoad(function() {
 
-    var n_trials = 10;
+    var n_trials = 100;
     var min_iti = 250;
     var max_iti = 750;
 
     var timeline = [];
+
+    var start_trial = {
+        type: 'html-button-response',
+        stimulus: '<div class="jspsych-rt-target" style="position:relative;"><div style="color:white;position: absolute;top: 50%; left: 50%;transform: translate(-50%,-50%);">Press the button to start.</div></div>',
+        choices: [''],
+        button_html: '<button class="jspsych-btn jspsych-rt-btn"></button>',
+        margin_vertical: '20px',
+        stimulus_duration: null,
+        trial_duration: null,
+        response_ends_trial: true,
+        post_trial_gap: max_iti,
+        data: {iti: max_iti, version: 'date', trial_type: 'start'}
+    };
+    timeline.push(start_trial);
 
     for (i=0;i<n_trials;i++) {
 
@@ -34,7 +48,7 @@
             trial_duration: 2000,
             response_ends_trial: true,
             post_trial_gap: current_iti,
-            data: {iti: current_iti}
+            data: {iti: current_iti, version: 'date', trial_type: 'test'}
         };
         timeline.push(trial);
     }
