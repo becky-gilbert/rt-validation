@@ -74,7 +74,7 @@ jsPsych.plugins["audio-button-response"] = (function() {
         description: 'If true, then the trial will end as soon as the audio file finishes playing.'
       },
     }
-  }
+  };
 
   plugin.trial = function(display_element, trial) {
 
@@ -119,16 +119,16 @@ jsPsych.plugins["audio-button-response"] = (function() {
       var str = buttons[i].replace(/%choice%/g, trial.choices[i]);
       html += '<div class="jspsych-audio-button-response-button" style="cursor: pointer; display: inline-block; margin:'+trial.margin_vertical+' '+trial.margin_horizontal+'" id="jspsych-audio-button-response-button-' + i +'" data-choice="'+i+'">'+str+'</div>';
     }
-    html += '</div>';
+		html += '</div>';
 
-    //show prompt if there is one
-    if (trial.prompt !== null) {
-      html += trial.prompt;
-    }
+		//show prompt if there is one
+		if (trial.prompt !== null) {
+			html += trial.prompt;
+		}
 
-    display_element.innerHTML = html;
+		display_element.innerHTML = html;
 
-    for (var i = 0; i < trial.choices.length; i++) {
+		for (var i = 0; i < trial.choices.length; i++) {
       display_element.querySelector('#jspsych-audio-button-response-button-' + i).addEventListener('click', function(e){
         var choice = e.currentTarget.getAttribute('data-choice'); // don't use dataset for jsdom compatibility
         after_response(choice);
@@ -160,7 +160,7 @@ jsPsych.plugins["audio-button-response"] = (function() {
       if (trial.response_ends_trial) {
         end_trial();
       }
-    };
+    }
 
     // function to end trial when it is time
     function end_trial() {
@@ -169,7 +169,7 @@ jsPsych.plugins["audio-button-response"] = (function() {
       // remove end event listeners if they exist
       if(context !== null){
         source.stop();
-        source.onended = function() { }
+        source.onended = function() { };
       } else {
         audio.pause();
         audio.removeEventListener('ended', end_trial);
@@ -190,9 +190,9 @@ jsPsych.plugins["audio-button-response"] = (function() {
 
       // move on to the next trial
       jsPsych.finishTrial(trial_data);
-    };
+    }
 
-    // start time
+		// start time
     var start_time = Date.now();
 
     // start audio
